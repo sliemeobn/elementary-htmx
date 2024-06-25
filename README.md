@@ -26,4 +26,4 @@ Check out the [Hummingbird example app](https://github.com/sliemeobn/elementary-
 
 ## Documentation
 
-The package brings the `.hx` to all `HTMLElements` with a rich API for most [HTMX attributes](https://htmx.org/docs/).
+The package brings the `.hx` syntaxt to all `HTMLElements` - providing a rich API for most [HTMX attributes](https://htmx.org/docs/).
