@@ -14,11 +14,11 @@ public extension HTMLAttribute.hx {
         .init(name: "hx-post", value: url)
     }
 
-    static func pushUrl(_ url: String) -> HTMLAttribute {
+    static func pushURL(_ url: String) -> HTMLAttribute {
         .init(name: "hx-push-url", value: url)
     }
 
-    static func pushUrl(_ value: Bool) -> HTMLAttribute {
+    static func pushURL(_ value: Bool) -> HTMLAttribute {
         .init(name: "hx-push-url", value: value.stringValue)
     }
 
@@ -84,11 +84,51 @@ public extension HTMLAttribute.hx {
         .init(name: "hx-disable", value: .none)
     }
 
+    static func disabledElt(_ value: String) -> HTMLAttribute {
+        .init(name: "hx-disabled-elt", value: value)
+    }
+
+    static func ext(_ value: String) -> HTMLAttribute {
+        .init(name: "hx-ext", value: value, mergedBy: .appending(seperatedBy: ","))
+    }
+
+    static func headers(_ value: String) -> HTMLAttribute {
+        .init(name: "hx-headers", value: value)
+    }
+
+    static func include(_ value: String) -> HTMLAttribute {
+        .init(name: "hx-include", value: value)
+    }
+
+    static func indicator(_ value: String) -> HTMLAttribute {
+        .init(name: "hx-indicator", value: value)
+    }
+
+    static func params(_ value: String) -> HTMLAttribute {
+        .init(name: "hx-params", value: value)
+    }
+
     static func patch(_ url: String) -> HTMLAttribute {
         .init(name: "hx-patch", value: url)
     }
 
     static func put(_ url: String) -> HTMLAttribute {
         .init(name: "hx-put", value: url)
+    }
+
+    static func replaceURL(_ url: String) -> HTMLAttribute {
+        .init(name: "hx-replace-url", value: url)
+    }
+
+    static func replaceURL(_ value: Bool) -> HTMLAttribute {
+        .init(name: "hx-replace-url", value: value.stringValue)
+    }
+
+    static func request(_ value: String) -> HTMLAttribute {
+        .init(name: "hx-request", value: value)
+    }
+
+    static func validate(_ value: Bool) -> HTMLAttribute {
+        .init(name: "hx-validate", value: value.stringValue)
     }
 }
