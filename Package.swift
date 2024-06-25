@@ -23,7 +23,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/sliemeobn/elementary.git", .upToNextMajor(from: "0.1.0-beta.4")),
+        .package(url: "https://github.com/sliemeobn/elementary.git", .upToNextMajor(from: "0.1.0-beta.5")),
     ],
     targets: [
         .target(
