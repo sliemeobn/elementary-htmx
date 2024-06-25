@@ -3,6 +3,9 @@
 **Ergonomic [HTMX](https://htmx.org/) extensions for [Elementary](https://github.com/sliemeobn/elementary)**
 
 ```swift
+import Elementary
+import ElementaryHTMX
+
 form(.hx.post("/items"), .hx.target("#list"), .hx.swap(.outerHTML)) {
     input(.type(.text), .name("item"), .value("New Item"))
     input(.type(.submit), .value("Add Item"))
