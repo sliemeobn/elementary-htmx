@@ -7,6 +7,7 @@ struct MainPage: HTMLDocument {
     var model: Model
 
     var head: some HTML {
+        meta(.charset(.utf8))
         script(.src("/htmx.min.js")) {}
     }
 
@@ -35,6 +36,7 @@ struct ItemList: HTML {
 
             for (index, item) in items.enumerated() {
                 div {
+                    // this hx-delete will use OOB swap
                     button(.hx.delete("items/\(index)")) { "❌" }
                     " "
                     item
