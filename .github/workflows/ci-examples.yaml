@@ -9,7 +9,7 @@ on:
 
 jobs:
   hummingbird:
-    name: Build Example
+    name: Build Hummingbird Example
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -28,7 +28,7 @@ jobs:
         run: swift build
 
   vapor:
-    name: Build Example
+    name: Build Vapor Example
     runs-on: ubuntu-latest
     defaults:
       run:
