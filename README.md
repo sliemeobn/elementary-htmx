@@ -25,6 +25,7 @@ MyFragment(items: items)
 ## Play with it
 
 Check out the [Hummingbird example app](https://github.com/sliemeobn/elementary-htmx/tree/main/Examples/HummingbirdDemo).
+Check out the [Vapor example app](https://github.com/sliemeobn/elementary-htmx/tree/main/Examples/VaporDemo).
 
 ## Documentation
 
