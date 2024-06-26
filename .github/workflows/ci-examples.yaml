@@ -7,23 +7,41 @@ on:
     branches: [main]
   workflow_dispatch:
 
-defaults:
-  run:
-    working-directory: ./Examples/HummingbirdDemo
-
 jobs:
-  ci:
-    name: Build Examples
+  hummingbird:
+    name: Build Example
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Examples/HummingbirdDemo
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/cache@v4
         with:
           path: .build
-          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          key: ${{ runner.os }}-spm-hummingbird-${{ hashFiles('**/Package.resolved') }}
           restore-keys: |
-            ${{ runner.os }}-spm-
+            ${{ runner.os }}-spm-hummingbird
+
+      - name: Build
+        run: swift build
+
+  vapor:
+    name: Build Example
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Examples/VaporDemo
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/cache@v4
+        with:
+          path: .build
+          key: ${{ runner.os }}-spm-vapor-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-vapor
 
       - name: Build
         run: swift build
