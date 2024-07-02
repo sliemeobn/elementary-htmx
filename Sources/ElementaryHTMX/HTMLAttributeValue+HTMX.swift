@@ -1,6 +1,8 @@
 import Elementary
 
 public extension HTMLAttributeValue {
+    /// A namespace for HTMX attribute value types.
+    /// See the [htmx reference](https://htmx.org/reference/) for more information.
     enum HTMX {}
 }
 

@@ -1,10 +1,11 @@
 import Elementary
 
 public extension HTMLAttribute where Tag: HTMLTrait.Attributes.Global {
+    /// A namespace for HTMX attributes.
+    /// See the [htmx reference](https://htmx.org/reference/) for more information.
     enum hx {}
 }
 
-// https://htmx.org/reference/
 public extension HTMLAttribute.hx {
     static func get(_ url: String) -> HTMLAttribute {
         .init(name: "hx-get", value: url)
