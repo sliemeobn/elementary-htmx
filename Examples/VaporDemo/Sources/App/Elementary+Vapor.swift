@@ -1,7 +1,7 @@
 import Elementary
 import Vapor
 
-struct HTMLResponse<Content: HTML> {
+struct HTMLResponse<Content: HTML & Sendable> {
     @HTMLBuilder var content: Content
 }
 

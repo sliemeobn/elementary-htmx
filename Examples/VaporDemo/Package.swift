@@ -22,7 +22,8 @@ let package = Package(
             ],
             resources: [
                 .copy("Public"),
-            ]
+            ],
+            swiftSettings: [.enableExperimentalFeature("StrictConcurrency=complete")]
         ),
     ]
 )
