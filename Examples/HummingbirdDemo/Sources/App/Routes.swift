@@ -1,4 +1,5 @@
 import Hummingbird
+import HummingbirdElementary
 
 func addRoutes(to router: Router<some RequestContext>) {
     router.get("") { _, _ in
