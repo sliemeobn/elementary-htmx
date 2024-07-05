@@ -1,5 +1,5 @@
-import Elementary
 import Vapor
+import VaporElementary
 
 func addRoutes(to app: Application) {
     app.get("") { _ in
