@@ -14,7 +14,7 @@ struct MainPage: HTMLDocument {
     var body: some HTML {
         header {
             h2 { "Vapor + Elementary + HTMX" }
-            div(.hx.sse.ext(), .hx.sse.connect("/time"), .hx.swap(.innerHTML)) {
+            div(.hx.ext(.sse), .hx.sse.connect("/time"), .hx.swap(.innerHTML)) {
                 div(.hx.sse.swap("time")) {
                     "waiting...."
                 }

@@ -11,10 +11,6 @@ public extension HTMLAttribute.hx where Tag: HTMLTrait.Attributes.Global {
 // https://github.com/bigskysoftware/htmx-extensions/blob/main/src/sse/README.md#listening-to-events-dispatched-by-this-extension
 
 public extension HTMLAttribute.hx.sse {
-    static func ext() -> HTMLAttribute {
-        .init(name: "hx-ext", value: "sse")
-    }
-
     static func connect(_ url: String) -> HTMLAttribute {
         .init(name: "sse-connect", value: url)
     }

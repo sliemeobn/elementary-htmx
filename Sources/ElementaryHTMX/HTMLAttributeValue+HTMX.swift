@@ -183,6 +183,22 @@ public extension HTMLAttributeValue.HTMX.EventTrigger {
     }
 }
 
+public extension HTMLAttributeValue.HTMX {
+    struct Extension: RawRepresentable, ExpressibleByStringLiteral {
+        public var rawValue: String
+        public init(rawValue: String) {
+            self.rawValue = rawValue
+        }
+
+        public init(stringLiteral value: String) {
+            rawValue = value
+        }
+
+        public static var sse: Self { "sse" }
+        // add other extensions here
+    }
+}
+
 extension Bool {
     var stringValue: String { self ? "true" : "false" }
 }

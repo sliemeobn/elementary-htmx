@@ -28,8 +28,7 @@ func addRoutes(to router: Router<some RequestContext>) {
                 continuation.finish()
             }
         }
-        let res = Response(status: .ok, headers: [.contentType: "text/event-"], body: .init(asyncSequence: stream))
-        print(res)
+        let res = Response(status: .ok, headers: [.contentType: "text/event-stream"], body: .init(asyncSequence: stream))
         return res
     }
 
