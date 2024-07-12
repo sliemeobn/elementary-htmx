@@ -23,7 +23,7 @@ func addRoutes(to app: Application) {
                     while true {
                         let data = "event: time\ndata: \(Date()) \n\n"
                         _ = writer.write(.buffer(.init(string: data)))
-                        try await Task.sleep(nanoseconds: 3_000_000_000)
+                        try await Task.sleep(nanoseconds: 1_000_000_000)
                     }
                 } catch {
                     req.logger.error("Stream Error: \(error)")

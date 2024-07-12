@@ -14,20 +14,16 @@ func addRoutes(to router: Router<some RequestContext>) {
     }
 
     router.get("/time") { _, _ in
-        let stream = AsyncThrowingStream(ByteBuffer.self) { continuation in
-            Task {
-                while true {
-                    // guard let data = try Event(event: "time", data: "\(Date())").toJSON()
-                    // else { break }
-                    let data = "event: time\ndata: \(Date()) \n\n"
-                    continuation.yield(.init(bytes: data.utf8))
-                    print("again")
-                    try await Task.sleep(nanoseconds: 3_000_000_000)
-                    break
-                }
-                continuation.finish()
+        let stream = AsyncStream<ByteBuffer> {
+            while true {
+                do { try await Task.sleep(nanoseconds: 1_000_000_000) }
+                catch { break }
+                let data = "event: time\ndata: \(Date()) \n\n"
+                return ByteBuffer(bytes: data.utf8)
             }
-        }
+
+            return ByteBuffer(bytes: "\0".utf8)
+        } onCancel: { @Sendable () in print("Canceled.") }
         let res = Response(status: .ok, headers: [.contentType: "text/event-stream"], body: .init(asyncSequence: stream))
         return res
     }
