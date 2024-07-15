@@ -20,7 +20,6 @@ func addRoutes(to router: Router<some RequestContext>) {
             .map { _ in
                 ByteBuffer(bytes: "event:time\ndata: \(Date())\n\n".utf8)
             }
-            .cancelOnGracefulShutdown()
         return Response.stream(timerSequence)
     }
 
@@ -66,6 +65,6 @@ struct Event: Encodable {
 
 public extension Response {
     static func stream<BufferSequence: AsyncSequence & Sendable>(_ asyncSequence: BufferSequence) -> Response where BufferSequence.Element == ByteBuffer {
-        .init(status: .ok, headers: [.contentType: "text/event-stream"], body: .init(asyncSequence: asyncSequence))
+        .init(status: .ok, headers: [.contentType: "text/event-stream"], body: .init(asyncSequence: asyncSequence.cancelOnGracefulShutdown()))
     }
 }
