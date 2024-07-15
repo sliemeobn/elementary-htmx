@@ -1,8 +1,10 @@
+import AsyncAlgorithms
 import Elementary
 import ElementaryHTMX
 import Foundation
 import Hummingbird
 import HummingbirdElementary
+import ServiceLifecycle
 
 func addRoutes(to router: Router<some RequestContext>) {
     router.get("") { _, _ in
@@ -14,17 +16,12 @@ func addRoutes(to router: Router<some RequestContext>) {
     }
 
     router.get("/time") { _, _ in
-        let stream = AsyncStream<ByteBuffer> {
-            while true {
-                do { try await Task.sleep(nanoseconds: 1_000_000_000) }
-                catch { break }
-                let data = "event: time\ndata: \(Date()) \n\n"
-                return ByteBuffer(bytes: data.utf8)
+        let timerSequence = AsyncTimerSequence(interval: .seconds(1), clock: ContinuousClock())
+            .map { _ in
+                ByteBuffer(bytes: "event:time\ndata: \(Date())\n\n".utf8)
             }
-
-            return ByteBuffer(bytes: "\0".utf8)
-        } onCancel: { @Sendable () in print("Canceled.") }
-        let res = Response(status: .ok, headers: [.contentType: "text/event-stream"], body: .init(asyncSequence: stream))
+            .cancelOnGracefulShutdown()
+        let res = Response(status: .ok, headers: [.contentType: "text/event-stream"], body: .init(asyncSequence: timerSequence))
         return res
     }
 
