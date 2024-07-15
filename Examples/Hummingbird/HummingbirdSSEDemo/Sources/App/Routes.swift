@@ -21,8 +21,7 @@ func addRoutes(to router: Router<some RequestContext>) {
                 ByteBuffer(bytes: "event:time\ndata: \(Date())\n\n".utf8)
             }
             .cancelOnGracefulShutdown()
-        let res = Response(status: .ok, headers: [.contentType: "text/event-stream"], body: .init(asyncSequence: timerSequence))
-        return res
+        return Response.stream(timerSequence)
     }
 
     router.post("/items") { request, context in
@@ -63,4 +62,10 @@ struct AddItemRequest: Decodable {
 struct Event: Encodable {
     var event: String
     var data: String
+}
+
+public extension Response {
+    static func stream<BufferSequence: AsyncSequence & Sendable>(_ asyncSequence: BufferSequence) -> Response where BufferSequence.Element == ByteBuffer {
+        .init(status: .ok, headers: [.contentType: "text/event-stream"], body: .init(asyncSequence: asyncSequence))
+    }
 }
