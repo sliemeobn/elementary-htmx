@@ -4,7 +4,7 @@ import ElementaryHTMXSSE
 import Foundation
 
 struct MainPage: HTMLDocument {
-    var title: String { "Vapor + Elementary + HTMX + HTMX SSE" }
+    var title: String { "Vapor + Elementary + HTMX" }
 
     var head: some HTML {
         meta(.charset(.utf8))
@@ -14,7 +14,7 @@ struct MainPage: HTMLDocument {
 
     var body: some HTML {
         header {
-            h2 { "Vapor + Elementary + HTMX + HTMX SSE" }
+            h2 { "Vapor + Elementary + HTMX Demo" }
             div(.hx.ext(.sse), .sse.connect("/time"), .sse.swap("time")) {
                 "Server Time: \(Date())"
             }

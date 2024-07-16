@@ -53,8 +53,3 @@ func addRoutes(to router: Router<some RequestContext>) {
 struct AddItemRequest: Decodable {
     var item: String
 }
-
-struct Event: Encodable {
-    var event: String
-    var data: String
-}

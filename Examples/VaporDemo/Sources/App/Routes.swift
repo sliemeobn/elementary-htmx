@@ -28,8 +28,3 @@ func addRoutes(to app: Application) {
         return res
     }
 }
-
-struct Event: Encodable {
-    var event: String
-    var data: String
-}

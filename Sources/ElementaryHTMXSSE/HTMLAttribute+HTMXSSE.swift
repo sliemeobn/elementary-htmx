@@ -7,9 +7,6 @@ public extension HTMLAttribute where Tag: HTMLTrait.Attributes.Global {
     enum sse {}
 }
 
-// TODO: implement API for event listeners for HTMX-SSE-events
-// https://github.com/bigskysoftware/htmx-extensions/blob/main/src/sse/README.md#listening-to-events-dispatched-by-this-extension
-
 public extension HTMLAttribute.sse {
     static func connect(_ url: String) -> HTMLAttribute {
         .init(name: "sse-connect", value: url)
