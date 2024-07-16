@@ -17,7 +17,7 @@ struct MainPage: HTMLDocument {
     var body: some HTML {
         header(.class("container")) {
             h2 { "Hummingbird + Elementary + HTMX Demo" }
-            div(.hx.ext(.sse), .sse.connect("/time"), .sse.swap("time")) {
+            div(.hx.ext(.sse), .sse.connect("/time"), .sse.swap("message")) {
                 TimeHeading()
             }
         }

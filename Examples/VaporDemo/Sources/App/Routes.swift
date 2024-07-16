@@ -17,14 +17,16 @@ func addRoutes(to app: Application) {
         }
     }
 
-    app.get("time") { request -> Response in
-        let body = Response.Body(stream: { writer in
-            request.eventLoop.scheduleRepeatedTask(initialDelay: .seconds(1), delay: .seconds(1)) { _ in
-                try writer.write(.buffer(.init(string: "event: time\ndata: Server Time: \(Date())\n\n")), promise: nil)
-            }
-        })
-        let res = Response(status: .ok, body: body)
-        res.headers.replaceOrAdd(name: "Content-Type", value: "text/event-stream")
-        return res
+    app.get("time") { _ -> Response in
+        Response(
+            status: .ok,
+            headers: ["Content-Type": "text/event-stream"],
+            body: .init(managedAsyncStream: { writer in
+                while true {
+                    try await writer.writeBuffer(.init(string: "event: time\ndata: Server Time: \(Date())\n\n"))
+                    try await Task.sleep(for: .seconds(1))
+                }
+            })
+        )
     }
 }

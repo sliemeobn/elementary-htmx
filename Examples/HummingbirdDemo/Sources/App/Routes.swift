@@ -11,12 +11,18 @@ func addRoutes(to router: Router<some RequestContext>) {
         }
     }
 
-    router.get("/time") { _, _ in
-        let timerSequence = AsyncTimerSequence(interval: .seconds(1), clock: ContinuousClock())
-            .map { _ in
-                TimeHeading()
+    router.get("/time") { _, context in
+        Response(
+            status: .ok,
+            headers: [.contentType: "text/event-stream"],
+            body: .init { writer in
+                while true {
+                    try await writer.write(context.allocator.buffer(
+                        string: "data: \(TimeHeading().render())\n\n"))
+                    try await Task.sleep(for: .seconds(1))
+                }
             }
-        return Response.stream(timerSequence, eventName: "time")
+        )
     }
 
     router.post("/items") { request, context in
