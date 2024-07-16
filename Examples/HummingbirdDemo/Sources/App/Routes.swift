@@ -1,3 +1,4 @@
+import AsyncAlgorithms
 import Hummingbird
 import HummingbirdElementary
 
@@ -8,6 +9,14 @@ func addRoutes(to router: Router<some RequestContext>) {
         return HTMLResponse {
             MainPage(model: model)
         }
+    }
+
+    router.get("/time") { _, _ in
+        let timerSequence = AsyncTimerSequence(interval: .seconds(1), clock: ContinuousClock())
+            .map { _ in
+                TimeHeading()
+            }
+        return Response.stream(timerSequence, eventName: "time")
     }
 
     router.post("/items") { request, context in

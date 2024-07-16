@@ -1,5 +1,6 @@
 import Elementary
-import ElementaryHTMX
+import ElementaryHTMXSSE
+import Foundation
 
 struct MainPage: HTMLDocument {
     var title: String { "Hummingbird + Elementary + HTMX" }
@@ -9,12 +10,16 @@ struct MainPage: HTMLDocument {
     var head: some HTML {
         meta(.charset(.utf8))
         script(.src("/htmx.min.js")) {}
+        script(.src("/htmxsse.min.js")) {}
         link(.href("/pico.min.css"), .rel(.stylesheet))
     }
 
     var body: some HTML {
         header(.class("container")) {
             h2 { "Hummingbird + Elementary + HTMX Demo" }
+            div(.hx.ext(.sse), .sse.connect("/time"), .sse.swap("time")) {
+                TimeHeading()
+            }
         }
         main(.class("container")) {
             div {
@@ -47,6 +52,14 @@ struct ItemList: HTML {
                     item
                 }
             }
+        }
+    }
+}
+
+struct TimeHeading: HTML {
+    var content: some HTML<HTMLTag.h4> {
+        h4 {
+            "Server Time: \(Date())"
         }
     }
 }

@@ -89,8 +89,8 @@ public extension HTMLAttribute.hx {
         .init(name: "hx-disabled-elt", value: value)
     }
 
-    static func ext(_ value: String) -> HTMLAttribute {
-        .init(name: "hx-ext", value: value, mergedBy: .appending(seperatedBy: ","))
+    static func ext(_ value: HTMLAttributeValue.HTMX.Extension) -> HTMLAttribute {
+        .init(name: "hx-ext", value: value.rawValue, mergedBy: .appending(seperatedBy: ","))
     }
 
     static func headers(_ value: String) -> HTMLAttribute {
