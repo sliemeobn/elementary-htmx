@@ -1,7 +1,7 @@
 import Elementary
 import ElementaryHTMX
 
-public extension HTMLAttribute.hx where Tag: HTMLTrait.Attributes.Global {
+public extension HTMLAttribute where Tag: HTMLTrait.Attributes.Global {
     /// A namespace for the HTMX SSE-extension.
     /// See the [htmx-sse reference](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/sse/README.md) for more information.
     enum sse {}
@@ -10,7 +10,7 @@ public extension HTMLAttribute.hx where Tag: HTMLTrait.Attributes.Global {
 // TODO: implement API for event listeners for HTMX-SSE-events
 // https://github.com/bigskysoftware/htmx-extensions/blob/main/src/sse/README.md#listening-to-events-dispatched-by-this-extension
 
-public extension HTMLAttribute.hx.sse {
+public extension HTMLAttribute.sse {
     static func connect(_ url: String) -> HTMLAttribute {
         .init(name: "sse-connect", value: url)
     }

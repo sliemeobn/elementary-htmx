@@ -21,7 +21,7 @@ func addRoutes(to app: Application) {
             Task {
                 do {
                     while true {
-                        let data = "event: time\ndata: \(Date()) \n\n"
+                        let data = "event: time\ndata: Server Timer:\(Date())\n\n"
                         _ = writer.write(.buffer(.init(string: data)))
                         try await Task.sleep(nanoseconds: 1_000_000_000)
                     }

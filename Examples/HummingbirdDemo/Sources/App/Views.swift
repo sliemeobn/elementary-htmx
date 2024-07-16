@@ -17,8 +17,10 @@ struct MainPage: HTMLDocument {
     var body: some HTML {
         header(.class("container")) {
             h2 { "Hummingbird + Elementary + HTMX SSE Demo" }
-            div(.hx.ext(.sse), .hx.sse.connect("/time"), .hx.sse.swap("time")) {
-                "\(Date())"
+            div(.hx.ext(.sse), .sse.connect("/time"), .sse.swap("time")) {
+                h4 {
+                    "Server Time: \(Date())"
+                }
             }
         }
         main(.class("container")) {
@@ -40,8 +42,26 @@ struct ItemList: HTML {
     var items: [String]
 
     var content: some HTML<HTMLTag.div> {
-        div {
-            ""
+        div(.id("list")) {
+            h4 { "Items" }
+            p { "Count: \(items.count)" }
+
+            for (index, item) in items.enumerated() {
+                div {
+                    // this hx-delete will use OOB swap
+                    button(.hx.delete("items/\(index)")) { "X" }
+                    " "
+                    item
+                }
+            }
+        }
+    }
+}
+
+struct TimeHeading: HTML {
+    var content: some HTML<HTMLTag.h4> {
+        h4 {
+            "Server Time: \(Date())"
         }
     }
 }

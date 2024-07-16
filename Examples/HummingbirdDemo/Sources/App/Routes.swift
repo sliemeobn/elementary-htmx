@@ -1,10 +1,6 @@
 import AsyncAlgorithms
-import Elementary
-import ElementaryHTMX
-import Foundation
 import Hummingbird
 import HummingbirdElementary
-import ServiceLifecycle
 
 func addRoutes(to router: Router<some RequestContext>) {
     router.get("") { _, _ in
@@ -18,9 +14,9 @@ func addRoutes(to router: Router<some RequestContext>) {
     router.get("/time") { _, _ in
         let timerSequence = AsyncTimerSequence(interval: .seconds(1), clock: ContinuousClock())
             .map { _ in
-                ByteBuffer(bytes: "event:time\ndata: \(Date())\n\n".utf8)
+                TimeHeading()
             }
-        return Response.stream(timerSequence)
+        return Response.stream(timerSequence, eventName: "time")
     }
 
     router.post("/items") { request, context in
@@ -61,10 +57,4 @@ struct AddItemRequest: Decodable {
 struct Event: Encodable {
     var event: String
     var data: String
-}
-
-public extension Response {
-    static func stream<BufferSequence: AsyncSequence & Sendable>(_ asyncSequence: BufferSequence) -> Response where BufferSequence.Element == ByteBuffer {
-        .init(status: .ok, headers: [.contentType: "text/event-stream"], body: .init(asyncSequence: asyncSequence.cancelOnGracefulShutdown()))
-    }
 }
