@@ -23,7 +23,7 @@ let package = Package(
                 .product(name: "Hummingbird", package: "hummingbird"),
                 .product(name: "HummingbirdElementary", package: "hummingbird-elementary"),
                 .product(name: "ElementaryHTMX", package: "elementary-htmx"),
-                .product(name: "ElementaryHxSSE", package: "elementary-htmx"),
+                .product(name: "ElementaryHTMXSSE", package: "elementary-htmx"),
                 .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
                 .product(name: "ServiceLifecycle", package: "swift-service-lifecycle"),
             ],

@@ -21,7 +21,7 @@ let package = Package(
                 .product(name: "Vapor", package: "vapor"),
                 .product(name: "VaporElementary", package: "vapor-elementary"),
                 .product(name: "ElementaryHTMX", package: "elementary-htmx"),
-                .product(name: "ElementaryHxSSE", package: "elementary-htmx"),
+                .product(name: "ElementaryHTMXSSE", package: "elementary-htmx"),
             ],
             resources: [
                 .copy("Public"),

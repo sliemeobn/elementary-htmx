@@ -22,8 +22,8 @@ let package = Package(
             targets: ["ElementaryHTMX"]
         ),
         .library(
-            name: "ElementaryHxSSE",
-            targets: ["ElementaryHxSSE"]
+            name: "ElementaryHTMXSSE",
+            targets: ["ElementaryHTMXSSE"]
         ),
     ],
     dependencies: [
@@ -38,7 +38,7 @@ let package = Package(
             swiftSettings: featureFlags
         ),
         .target(
-            name: "ElementaryHxSSE",
+            name: "ElementaryHTMXSSE",
             dependencies: [
                 .product(name: "Elementary", package: "elementary"),
                 .target(name: "ElementaryHTMX"),

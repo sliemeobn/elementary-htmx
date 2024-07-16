@@ -1,20 +1,20 @@
 import Elementary
 import ElementaryHTMX
-import ElementaryHxSSE
+import ElementaryHTMXSSE
 import Foundation
 
 struct MainPage: HTMLDocument {
-    var title: String { "Vapor + Elementary + HTMX" }
+    var title: String { "Vapor + Elementary + HTMX + HTMX SSE" }
 
     var head: some HTML {
         meta(.charset(.utf8))
         script(.src("/htmx.min.js")) {}
-        script(.src("https://unpkg.com/htmx-ext-sse@2.0.0/sse.js")) {}
+        script(.src("/htmxsse.min.js")) {}
     }
 
     var body: some HTML {
         header {
-            h2 { "Vapor + Elementary + HTMX" }
+            h2 { "Vapor + Elementary + HTMX + HTMX SSE" }
             div(.hx.ext(.sse), .sse.connect("/time"), .sse.swap("time")) {
                 "Server Time: \(Date())"
             }

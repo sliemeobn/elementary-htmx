@@ -1,5 +1,4 @@
 import Elementary
-import ElementaryHTMX
 import Hummingbird
 import HummingbirdElementary
 import ServiceLifecycle
