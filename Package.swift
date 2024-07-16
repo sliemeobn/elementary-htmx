@@ -52,5 +52,12 @@ let package = Package(
             ],
             swiftSettings: featureFlags
         ),
+        .testTarget(
+            name: "ElementaryHTMXSSETest",
+            dependencies: [
+                .target(name: "ElementaryHTMXSSE"),
+            ],
+            swiftSettings: featureFlags
+        ),
     ]
 )

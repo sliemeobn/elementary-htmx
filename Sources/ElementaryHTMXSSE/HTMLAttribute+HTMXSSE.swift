@@ -22,8 +22,4 @@ public extension HTMLAttribute.sse {
     static func close(_ eventName: String) -> HTMLAttribute {
         .init(name: "sse-close", value: eventName)
     }
-
-    static func trigger(_ eventName: String) -> HTMLAttribute {
-        .init(name: "hx-trigger", value: "sse:\(eventName)")
-    }
 }
