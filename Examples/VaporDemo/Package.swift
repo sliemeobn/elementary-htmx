@@ -13,6 +13,7 @@ let package = Package(
         .package(url: "https://github.com/vapor/vapor", from: "4.102.0"),
         .package(url: "https://github.com/vapor-community/vapor-elementary.git", from: "0.1.0"),
         .package(path: "../../"),
+        .package(url: "https://github.com/apple/swift-async-algorithms", from: "1.0.0"),
     ],
     targets: [
         .executableTarget(
@@ -22,6 +23,7 @@ let package = Package(
                 .product(name: "VaporElementary", package: "vapor-elementary"),
                 .product(name: "ElementaryHTMX", package: "elementary-htmx"),
                 .product(name: "ElementaryHTMXSSE", package: "elementary-htmx"),
+                .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
             ],
             resources: [
                 .copy("Public"),

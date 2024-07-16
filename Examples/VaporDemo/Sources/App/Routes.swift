@@ -1,3 +1,4 @@
+import AsyncAlgorithms
 import Vapor
 import VaporElementary
 
@@ -16,20 +17,10 @@ func addRoutes(to app: Application) {
         }
     }
 
-    app.get("time") { req -> Response in
+    app.get("time") { request -> Response in
         let body = Response.Body(stream: { writer in
-            Task {
-                do {
-                    while true {
-                        let data = "event: time\ndata: Server Timer:\(Date())\n\n"
-                        _ = writer.write(.buffer(.init(string: data)))
-                        try await Task.sleep(nanoseconds: 1_000_000_000)
-                    }
-                } catch {
-                    req.logger.error("Stream Error: \(error)")
-                    // _ = writer.write(.error(error)) // writing error would crash the app
-                }
-                _ = writer.write(.end)
+            request.eventLoop.scheduleRepeatedTask(initialDelay: .seconds(1), delay: .seconds(1)) { _ in
+                try writer.write(.buffer(.init(string: "event: time\ndata: Server Time: \(Date())\n\n")), promise: nil)
             }
         })
         let res = Response(status: .ok, body: body)
