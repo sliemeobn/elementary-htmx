@@ -32,9 +32,10 @@ Check out the [Vapor example app](https://github.com/sliemeobn/elementary-htmx/t
 
 The package brings the `.hx` syntaxt to all `HTMLElements` - providing a rich API for most [HTMX attributes](https://htmx.org/docs/).
 
+There is also a `ElementaryHTMXSSE` module that adds the `.sse` syntax for the [Server Sent Events extensions.](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/sse/README.md)
+
 ## Future directions
 
-- Add module for [Server Sent Events extensions](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/sse/README.md)
 - Add module for [WebSockets extension](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/ws/README.md)
 - Add module (or separate package?) for HTMX Request and Response headers
 
