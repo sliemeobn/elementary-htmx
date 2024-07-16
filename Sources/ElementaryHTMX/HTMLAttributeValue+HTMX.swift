@@ -193,9 +193,6 @@ public extension HTMLAttributeValue.HTMX {
         public init(stringLiteral value: String) {
             rawValue = value
         }
-
-        public static var sse: Self { "sse" }
-        // add other extensions here
     }
 }
 
