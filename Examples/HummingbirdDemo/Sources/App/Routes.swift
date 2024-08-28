@@ -11,14 +11,13 @@ func addRoutes(to router: Router<some RequestContext>) {
         }
     }
 
-    router.get("/time") { _, context in
+    router.get("/time") { _, _ in
         Response(
             status: .ok,
             headers: [.contentType: "text/event-stream"],
             body: .init { writer in
                 while true {
-                    try await writer.write(context.allocator.buffer(
-                        string: "data: \(TimeHeading().render())\n\n"))
+                    try await writer.write(ByteBuffer(string: "data: \(TimeHeading().render())\n\n"))
                     try await Task.sleep(for: .seconds(1))
                 }
             }
