@@ -22,10 +22,13 @@ public extension HTMLAttributeValue.HTMX {
         public static var textContent: Self { "textContent" }
         public static var beforeBegin: Self { "beforebegin" }
         public static var afterBegin: Self { "afterbegin" }
-        public static var beforEend: Self { "beforeend" }
+        public static var beforeEnd: Self { "beforeend" }
         public static var afterEnd: Self { "afterend" }
         public static var delete: Self { "delete" }
         public static var none: Self { "none" }
+
+        @available(*, deprecated, renamed: "beforeEnd")
+        public static var beforEend: Self { "beforeend" }
     }
 
     struct ModifiedSwapTarget: RawRepresentable {
@@ -43,11 +46,14 @@ public extension HTMLAttributeValue.HTMX {
         public static var textContent: Self { .init(.textContent) }
         public static var beforeBegin: Self { .init(.beforeBegin) }
         public static var afterBegin: Self { .init(.afterBegin) }
-        public static var beforEend: Self { .init(.beforEend) }
+        public static var beforeEnd: Self { .init(.beforeEnd) }
         public static var afterEnd: Self { .init(.afterEnd) }
         public static var delete: Self { .init(.delete) }
         public static var none: Self { .init(.none) }
         public static var `default`: Self { .init("") }
+
+        @available(*, deprecated, renamed: "beforeEnd")
+        public static var beforEend: Self { .init(.beforEend) }
     }
 }
 
