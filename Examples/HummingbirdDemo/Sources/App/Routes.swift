@@ -16,10 +16,10 @@ func addRoutes(to router: Router<some RequestContext>) {
             status: .ok,
             headers: [.contentType: "text/event-stream"],
             body: .init { writer in
-                while true {
+                for await _ in AsyncTimerSequence.repeating(every: .seconds(1)).cancelOnGracefulShutdown() {
                     try await writer.write(ByteBuffer(string: "data: \(TimeHeading().render())\n\n"))
-                    try await Task.sleep(for: .seconds(1))
                 }
+                try await writer.finish(nil)
             }
         )
     }
