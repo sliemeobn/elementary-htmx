@@ -5,8 +5,6 @@ import Foundation
 struct MainPage: HTMLDocument {
     var title: String { "Hummingbird + Elementary + HTMX" }
 
-    var model: Model
-
     var head: some HTML {
         meta(.charset(.utf8))
         script(.src("/htmx.min.js")) {}
@@ -31,20 +29,22 @@ struct MainPage: HTMLDocument {
                     }
                 }
             }
-            ItemList(items: model.items)
+            ItemList()
         }
     }
 }
 
 struct ItemList: HTML {
-    var items: [String]
+    @Environment(EnvironmentValues.$database) var database
 
     var content: some HTML<HTMLTag.div> {
         div(.id("list")) {
+            let items = await database.model.items
+
             h4 { "Items" }
             p { "Count: \(items.count)" }
 
-            for (index, item) in items.enumerated() {
+            ForEach(items.enumerated()) { index, item in
                 div {
                     // this hx-delete will use OOB swap
                     button(.hx.delete("items/\(index)")) { "X" }
@@ -62,4 +62,8 @@ struct TimeHeading: HTML {
             "Server Time: \(Date())"
         }
     }
+}
+
+enum EnvironmentValues {
+    @TaskLocal static var database: Database = .shared
 }
