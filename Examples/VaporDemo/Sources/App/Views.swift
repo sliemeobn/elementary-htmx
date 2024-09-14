@@ -42,10 +42,17 @@ struct ResultView: HTML {
     let x: Int
     let y: Int
 
+    @Environment(requiring: BonusFactStore.$current) var bonusFacts
+
     var content: some HTML {
         p {
             "\(x) + \(y) = "
             b { "\(x + y)" }
+        }
+        p {
+            i {
+                await bonusFacts.calculateBonusFact()
+            }
         }
     }
 }
