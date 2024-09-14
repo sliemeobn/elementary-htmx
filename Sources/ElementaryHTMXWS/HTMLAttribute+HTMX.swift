@@ -11,11 +11,11 @@ public extension HTMLAttribute.ws {
     struct WSURLPrefix {
         var value: String
 
-        static func ws(_ url: String) -> Self {
+        public static func ws(_ url: String) -> Self {
             .init(value: "ws:\(url)")
         }
 
-        static func wss(_ url: String) -> Self {
+        public static func wss(_ url: String) -> Self {
             .init(value: "wss:\(url)")
         }
     }
