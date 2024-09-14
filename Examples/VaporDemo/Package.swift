@@ -23,6 +23,7 @@ let package = Package(
                 .product(name: "VaporElementary", package: "vapor-elementary"),
                 .product(name: "ElementaryHTMX", package: "elementary-htmx"),
                 .product(name: "ElementaryHTMXSSE", package: "elementary-htmx"),
+                .product(name: "ElementaryHTMXWS", package: "elementary-htmx"),
                 .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
             ],
             resources: [
