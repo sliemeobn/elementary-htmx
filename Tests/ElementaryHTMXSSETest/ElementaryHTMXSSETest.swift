@@ -1,5 +1,6 @@
 import Elementary
 import ElementaryHTMXSSE
+import TestUtilities
 import XCTest
 
 final class elementary_htmxsseTests: XCTestCase {
