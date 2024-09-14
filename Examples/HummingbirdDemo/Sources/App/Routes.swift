@@ -1,6 +1,8 @@
 import AsyncAlgorithms
 import Hummingbird
 import HummingbirdElementary
+import HummingbirdWebSocket
+import NIOWebSocket
 
 func addRoutes(to router: Router<some RequestContext>) {
     router.get("") { _, _ in
@@ -57,4 +59,28 @@ func addRoutes(to router: Router<some RequestContext>) {
 
 struct AddItemRequest: Decodable {
     var item: String
+}
+
+func addWSRoutes(to router: Router<some WebSocketRequestContext>) {
+    router.ws("echo") { _, _ in
+        .upgrade([:])
+    } onUpgrade: { inbound, outbound, _ in
+        // parse WebSocket frames
+        for try await frame in inbound {
+            if frame.opcode == .text, String(buffer: frame.data) == "disconnect", frame.fin == true {
+                break
+            }
+            let opcode: WebSocketOpcode = switch frame.opcode {
+            case .text: .text
+            case .binary: .binary
+            case .continuation: .continuation
+            }
+            let frame = WebSocketFrame(
+                fin: frame.fin,
+                opcode: opcode,
+                data: frame.data
+            )
+            try await outbound.write(.text("<div id=\"echo\">Received: \(String(buffer: frame.data))</div>"))
+        }
+    }
 }

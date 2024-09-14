@@ -1,5 +1,6 @@
 import Elementary
 import ElementaryHTMXSSE
+import ElementaryHTMXWS
 import Foundation
 
 struct MainPage: HTMLDocument {
@@ -11,14 +12,21 @@ struct MainPage: HTMLDocument {
         meta(.charset(.utf8))
         script(.src("/htmx.min.js")) {}
         script(.src("/htmxsse.min.js")) {}
+        script(.src("/htmxws.min.js")) {}
         link(.href("/pico.min.css"), .rel(.stylesheet))
     }
 
     var body: some HTML {
         header(.class("container")) {
             h2 { "Hummingbird + Elementary + HTMX Demo" }
+            // example of using htmx sse
             div(.hx.ext(.sse), .sse.connect("/time"), .sse.swap("message")) {
                 TimeHeading()
+            }
+            // example of using htmx ws
+            div(.hx.ext(.ws), .ws.connect("/echo"), .hx.vals("{ \"value\": \"TestValue\"}"), .hx.swapOOB(.innerHTML), .hx.target("#echo"), .class("flex justify-between")) {
+                button(.ws.send, .class("btn btn-primary")) { "Send" }
+                span(.id("echo"), .hx.swapOOB(.innerHTML)) {}
             }
         }
         main(.class("container")) {
