@@ -36,7 +36,6 @@ There is also a `ElementaryHTMXSSE` module that adds the `.sse` syntax for the [
 
 ## Future directions
 
-- Add module for [WebSockets extension](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/ws/README.md)
 - Add module (or separate package?) for HTMX Request and Response headers
 
 PRs welcome.

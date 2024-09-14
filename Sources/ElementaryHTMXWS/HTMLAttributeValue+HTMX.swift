@@ -9,8 +9,4 @@ public extension HTMLAttributeValue.HTMX.EventTrigger {
     static func ws(_ eventName: String) -> Self {
         .init(rawValue: "ws:\(eventName)")
     }
-
-    static func wss(_ eventName: String) -> Self {
-        .init(rawValue: "wss:\(eventName)")
-    }
 }
