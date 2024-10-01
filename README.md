@@ -21,6 +21,27 @@ div {
 MyFragment(items: items)
     .attributes(.hx.swapOOB(.outerHTML, "#list"))
 ```
+```swift
+import Elementary
+import ElementaryHTMXSSE
+
+div(.hx.ext(.sse), .sse.connect("/time"), .sse.swap("message")) {
+    Date()
+}
+```
+```swift
+import Elementary
+import ElementaryHTMXWS
+
+div(.hx.ext(.ws), .ws.connect("/echo"), .hx.target("#echo")) {
+    form(.ws.send) {
+        input(.type(.text), .name("message"))
+        button { "Send" }
+    }
+    div(.id("echo")) {}
+}
+// Hint: The server needs to return a HTML element with the id of the .hx.target
+```
 
 ## Play with it
 
