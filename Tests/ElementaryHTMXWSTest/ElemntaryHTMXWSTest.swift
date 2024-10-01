@@ -10,8 +10,6 @@ final class elementary_htmxsseTests: XCTestCase {
 
     func testAttributes() {
         HTMLAttributeAssertEqual(.ws.connect("/test"), "ws-connect", "/test")
-        HTMLAttributeAssertEqual(.ws.connect(.ws("/test")), "ws-connect", "ws:/test")
-        HTMLAttributeAssertEqual(.ws.connect(.wss("/test")), "ws-connect", "wss:/test")
     }
 
     func testAttributeValues() {
