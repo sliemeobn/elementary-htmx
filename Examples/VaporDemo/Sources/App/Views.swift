@@ -22,9 +22,12 @@ struct MainPage: HTMLDocument {
                 p(.sse.swap("time")) { "Server Time:" }
             }
             // example of using htmx ws
-            div(.hx.ext(.ws), .ws.connect("/echo"), .hx.vals("{ \"value\": \"TestValue\"}"), .hx.swapOOB(.innerHTML), .hx.target("#echo"), .class("flex justify-between")) {
-                button(.ws.send, .class("btn btn-primary")) { "Send" }
-                span(.id("echo"), .hx.swapOOB(.innerHTML)) {}
+            div(.hx.ext(.ws), .ws.connect("/echo"), .hx.target("#echo")) {
+                form(.ws.send, .style("display: flex;")) {
+                    input(.type(.text), .name("message"), .value("Hello, World!"), .required)
+                    button(.class("btn btn-primary"), .style("height: 100%; margin-left: 1rem;")) { "Send" }
+                }
+                div(.id("echo")) {}
             }
         }
         main {
