@@ -30,8 +30,7 @@ func addRoutes(to app: Application) {
         )
     }
 
-    app.webSocket("echo") { req, ws in
-        print(req)
+    app.webSocket("echo") { _, ws in
         ws.onText { ws, text in
             ws.send("<div id=\"echo\">Echo: \(text)</div>")
         }

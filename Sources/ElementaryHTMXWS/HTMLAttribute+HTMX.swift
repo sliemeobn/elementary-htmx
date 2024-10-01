@@ -8,22 +8,6 @@ public extension HTMLAttribute where Tag: HTMLTrait.Attributes.Global {
 }
 
 public extension HTMLAttribute.ws {
-    struct WSURLPrefix {
-        var value: String
-
-        public static func ws(_ url: String) -> Self {
-            .init(value: "ws:\(url)")
-        }
-
-        public static func wss(_ url: String) -> Self {
-            .init(value: "wss:\(url)")
-        }
-    }
-
-    static func connect(_ prefixedURL: WSURLPrefix) -> HTMLAttribute {
-        connect(prefixedURL.value)
-    }
-
     static func connect(_ url: String) -> HTMLAttribute {
         .init(name: "ws-connect", value: url)
     }
