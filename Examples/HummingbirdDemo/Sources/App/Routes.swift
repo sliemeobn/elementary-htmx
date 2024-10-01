@@ -8,10 +8,8 @@ import ElementaryHTMX
 
 func addRoutes(to router: Router<some RequestContext>) {
     router.get("") { _, _ in
-        let model = await Database.shared.model
-
-        return HTMLResponse {
-            MainPage(model: model)
+        HTMLResponse {
+            MainPage()
         }
     }
 
@@ -31,10 +29,9 @@ func addRoutes(to router: Router<some RequestContext>) {
     router.post("/items") { request, context in
         let body = try await request.decode(as: AddItemRequest.self, context: context)
         await Database.shared.addItem(body.item)
-        let items = await Database.shared.model.items
 
         return HTMLResponse {
-            ItemList(items: items)
+            ItemList()
         }
     }
 
@@ -49,11 +46,9 @@ func addRoutes(to router: Router<some RequestContext>) {
             throw HTTPError(.notFound)
         }
 
-        let items = await Database.shared.model.items
-
         return HTMLResponse {
             // exmple of using OOB swaps
-            ItemList(items: items)
+            ItemList()
                 .attributes(.hx.swapOOB(.outerHTML, "#list"))
         }
     }
