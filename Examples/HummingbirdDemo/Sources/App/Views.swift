@@ -24,9 +24,12 @@ struct MainPage: HTMLDocument {
                 TimeHeading()
             }
             // example of using htmx ws
-            div(.hx.ext(.ws), .ws.connect("/echo"), .hx.vals("{ \"value\": \"TestValue\"}"), .hx.swapOOB(.innerHTML), .hx.target("#echo"), .class("flex justify-between")) {
-                button(.ws.send, .class("btn btn-primary")) { "Send" }
-                span(.id("echo"), .hx.swapOOB(.innerHTML)) {}
+            div(.hx.ext(.ws), .ws.connect("/echo"), .hx.target("#echo")) {
+                form(.ws.send, .style("display: flex;")) {
+                    input(.type(.text), .name("message"), .value("Hello, World!"), .required)
+                    button(.class("btn btn-primary"), .style("height: 100%; margin-left: 1rem;")) { "Send" }
+                }
+                div(.id("echo")) {}
             }
         }
         main(.class("container")) {
@@ -68,6 +71,17 @@ struct TimeHeading: HTML {
     var content: some HTML<HTMLTag.h4> {
         h4 {
             "Server Time: \(Date())"
+        }
+    }
+}
+
+struct WSResponse: HTML {
+    var echoRequest: EchoRequest
+
+    var content: some HTML {
+        div(.id(echoRequest.headers.HXTarget), .hx.swapOOB(.beforeEnd, "#\(echoRequest.headers.HXTarget)")) {
+            "Received: \(echoRequest.message) at \(Date())"
+            br()
         }
     }
 }

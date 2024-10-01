@@ -1,8 +1,10 @@
 import AsyncAlgorithms
+import Foundation
 import Hummingbird
 import HummingbirdElementary
 import HummingbirdWebSocket
 import NIOWebSocket
+import ElementaryHTMX
 
 func addRoutes(to router: Router<some RequestContext>) {
     router.get("") { _, _ in
@@ -65,22 +67,36 @@ func addWSRoutes(to router: Router<some WebSocketRequestContext>) {
     router.ws("echo") { _, _ in
         .upgrade([:])
     } onUpgrade: { inbound, outbound, _ in
-        // parse WebSocket frames
-        for try await frame in inbound {
-            if frame.opcode == .text, String(buffer: frame.data) == "disconnect", frame.fin == true {
-                break
-            }
-            let opcode: WebSocketOpcode = switch frame.opcode {
-            case .text: .text
-            case .binary: .binary
-            case .continuation: .continuation
-            }
-            let frame = WebSocketFrame(
-                fin: frame.fin,
-                opcode: opcode,
-                data: frame.data
-            )
-            try await outbound.write(.text("<div id=\"echo\">Received: \(String(buffer: frame.data))</div>"))
+        for try await input in inbound.messages(maxSize: 1_000_000) {
+            guard case let .text(text) = input else { continue }
+            let echoRequest = try JSONDecoder().decode(EchoRequest.self, from: text.data(using: .utf8)!)
+            try await outbound.write(.text(WSResponse(echoRequest: echoRequest).render()))
         }
+    }
+}
+
+struct EchoRequest: Codable {
+    var message: String
+    var headers: HTMXHeaders
+
+    enum CodingKeys: String, CodingKey {
+        case message
+        case headers = "HEADERS"
+    }
+}
+
+struct HTMXHeaders: Codable {
+    var HXRequest: String
+    var HXTrigger: String?
+    var HXTriggerName: String?
+    var HXTarget: String
+    var HXCurrentURL: String?
+
+    enum CodingKeys: String, CodingKey {
+        case HXRequest = "HX-Request"
+        case HXTrigger = "HX-Trigger"
+        case HXTriggerName = "HX-Trigger-Name"
+        case HXTarget = "HX-Target"
+        case HXCurrentURL = "HX-Current-URL"
     }
 }
