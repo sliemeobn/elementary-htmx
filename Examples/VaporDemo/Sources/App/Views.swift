@@ -12,31 +12,26 @@ struct MainPage: HTMLDocument {
         script(.src("/htmx.min.js")) {}
         script(.src("/htmxsse.min.js")) {}
         script(.src("/htmxws.min.js")) {}
+        link(.rel(.stylesheet), .href("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css"))
     }
 
     var body: some HTML {
         header {
             h2 { "Vapor + Elementary + HTMX Demo" }
             // example of using htmx sse
+            h6 { "HTMX SSE Example" }
             div(.hx.ext(.sse), .sse.connect("/time")) {
                 p(.sse.swap("time")) { "Server Time:" }
             }
-            // example of using htmx ws
-            div(.hx.ext(.ws), .ws.connect("/echo"), .hx.target("#echo")) {
-                form(.ws.send, .style("display: flex;")) {
-                    input(.type(.text), .name("message"), .value("Hello, World!"), .required)
-                    button(.class("btn btn-primary"), .style("height: 100%; margin-left: 1rem;")) { "Send" }
-                }
-                div(.id("echo")) {}
-            }
         }
         main {
+            h6 { "HTMX Forms Example" }
             div {
                 // example of using hx-target and hx-swap
                 form(.hx.get("/result"), .hx.target("#result"), .hx.swap(.innerHTML)) {
-                    div(.class("grid")) {
+                    fieldset(.custom(name: "role", value: "group")) {
                         input(.type(.number), .name("x"), .value("1"), .required)
-                        span { " + " }
+                        input(.type(.text), .value("+"), .disabled)
                         input(.type(.number), .name("y"), .value("2"), .required)
                         input(.type(.submit), .value("Calculate"))
                     }
@@ -44,6 +39,16 @@ struct MainPage: HTMLDocument {
             }
             div(.id("result")) {
                 p { i { "Result will be calculated on the server" } }
+            }
+            hr()
+            h6 { "HTMX WS Example" }
+            // example of using htmx ws
+            div(.hx.ext(.ws), .ws.connect("/echo")) {
+                form(.ws.send, .custom(name: "role", value: "group")) {
+                    input(.type(.text), .name("message"), .value("Hello, World!"), .required)
+                    button { "Send" }
+                }
+                div(.id("echo")) {}
             }
         }
     }
@@ -65,5 +70,13 @@ struct ResultView: HTML {
                 await bonusFacts.calculateBonusFact()
             }
         }
+    }
+}
+
+struct WSEcho: HTML {
+    let message: String
+
+    var content: some HTML {
+        div(.id("echo"), .hx.swapOOB(.beforeEnd)) { "Echo: \(message)"; br() }
     }
 }

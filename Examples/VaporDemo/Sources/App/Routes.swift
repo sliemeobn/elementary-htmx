@@ -32,8 +32,18 @@ func addRoutes(to app: Application) {
     }
 
     app.webSocket("echo") { _, ws in
+        let decoder = JSONDecoder()
+
         ws.onText { ws, text in
-            ws.send("<div id=\"echo\" hx-swap-oob=\"beforeend:#echo\">Echo: \(text)<br></div>")
+            guard let message = try? decoder.decode(WSMessage.self, from: Data(text.utf8)) else {
+                return
+            }
+
+            ws.send(WSEcho(message: message.message).render())
         }
     }
+}
+
+struct WSMessage: Codable {
+    var message: String
 }
