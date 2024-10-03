@@ -8,6 +8,7 @@
 import Elementary
 import ElementaryHTMX
 
+// first-class support for all HTMX attributes
 form(.hx.post("/items"), .hx.target("#list"), .hx.swap(.outerHTML)) {
     input(.type(.text), .name("item"), .value("New Item"))
     input(.type(.submit), .value("Add Item"))
@@ -21,26 +22,29 @@ div {
 MyFragment(items: items)
     .attributes(.hx.swapOOB(.outerHTML, "#list"))
 ```
+
 ```swift
 import Elementary
 import ElementaryHTMXSSE
 
+// HTMX Server Send Events extension
 div(.hx.ext(.sse), .sse.connect("/time"), .sse.swap("message")) {
     Date()
 }
 ```
+
 ```swift
 import Elementary
 import ElementaryHTMXWS
 
-div(.hx.ext(.ws), .ws.connect("/echo"), .hx.target("#echo")) {
+// HTMX WebSockets extension
+div(.hx.ext(.ws), .ws.connect("/echo")) {
     form(.ws.send) {
         input(.type(.text), .name("message"))
         button { "Send" }
     }
     div(.id("echo")) {}
 }
-// Hint: The server needs to return a HTML element with the id of the .hx.target
 ```
 
 ## Play with it
@@ -53,7 +57,7 @@ Check out the [Vapor example app](https://github.com/sliemeobn/elementary-htmx/t
 
 The package brings the `.hx` syntaxt to all `HTMLElements` - providing a rich API for most [HTMX attributes](https://htmx.org/docs/).
 
-There is also a `ElementaryHTMXSSE` module that adds the `.sse` syntax for the [Server Sent Events extensions.](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/sse/README.md)
+There is also an `ElementaryHTMXSSE` module that adds the `.sse` syntax for the [Server Sent Events extensions](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/sse/README.md), as well as `ElementaryHTMXWS` to add the `.ws` syntax for the [WebSockets extensions.](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/ws/README.md)
 
 ## Future directions
 
