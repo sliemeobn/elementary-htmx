@@ -1,10 +1,11 @@
 import AsyncAlgorithms
+import Elementary
+import ElementaryHTMX
 import Foundation
 import Hummingbird
 import HummingbirdElementary
 import HummingbirdWebSocket
 import NIOWebSocket
-import ElementaryHTMX
 
 func addRoutes(to router: Router<some RequestContext>) {
     router.get("") { _, _ in
@@ -19,7 +20,7 @@ func addRoutes(to router: Router<some RequestContext>) {
             headers: [.contentType: "text/event-stream"],
             body: .init { writer in
                 for await _ in AsyncTimerSequence.repeating(every: .seconds(1)).cancelOnGracefulShutdown() {
-                    try await writer.write(ByteBuffer(string: "data: \(TimeHeading().render())\n\n"))
+                    try await writer.writeSSE(html: TimeHeading())
                 }
                 try await writer.finish(nil)
             }
@@ -81,17 +82,28 @@ struct EchoRequest: Codable {
 }
 
 struct HTMXHeaders: Codable {
-    var HXRequest: String
-    var HXTrigger: String?
-    var HXTriggerName: String?
-    var HXTarget: String
-    var HXCurrentURL: String?
+    var hxRequest: String
+    var hxTrigger: String?
+    var hxTriggerName: String?
+    var hxTarget: String
+    var hxCurrentURL: String?
 
     enum CodingKeys: String, CodingKey {
-        case HXRequest = "HX-Request"
-        case HXTrigger = "HX-Trigger"
-        case HXTriggerName = "HX-Trigger-Name"
-        case HXTarget = "HX-Target"
-        case HXCurrentURL = "HX-Current-URL"
+        case hxRequest = "HX-Request"
+        case hxTrigger = "HX-Trigger"
+        case hxTriggerName = "HX-Trigger-Name"
+        case hxTarget = "HX-Target"
+        case hxCurrentURL = "HX-Current-URL"
+    }
+}
+
+extension ResponseBodyWriter {
+    mutating func writeSSE(event: String? = nil, html: some HTML) async throws {
+        if let event {
+            try await write(ByteBuffer(string: "event: \(event)\n"))
+        }
+        try await write(ByteBuffer(string: "data: "))
+        try await writeHTML(html)
+        try await write(ByteBuffer(string: "\n\n"))
     }
 }
