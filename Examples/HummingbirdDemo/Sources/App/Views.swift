@@ -18,19 +18,13 @@ struct MainPage: HTMLDocument {
         header(.class("container")) {
             h2 { "Hummingbird + Elementary + HTMX Demo" }
             // example of using htmx sse
+            h6 { "HTMX SSE example" }
             div(.hx.ext(.sse), .sse.connect("/time"), .sse.swap("message")) {
                 TimeHeading()
             }
-            // example of using htmx ws
-            div(.hx.ext(.ws), .ws.connect("/echo"), .hx.target("#echo")) {
-                form(.ws.send, .style("display: flex;")) {
-                    input(.type(.text), .name("message"), .value("Hello, World!"), .required)
-                    button(.class("btn btn-primary"), .style("height: 100%; margin-left: 1rem;")) { "Send" }
-                }
-                div(.id("echo")) {}
-            }
         }
         main(.class("container")) {
+            h6 { "HTMX Post/Delete example" }
             div {
                 // example of using hx-target and hx-swap
                 form(.hx.post("/items"), .hx.target("#list"), .hx.swap(.outerHTML)) {
@@ -39,8 +33,18 @@ struct MainPage: HTMLDocument {
                         input(.type(.submit), .value("Add Item"))
                     }
                 }
+                ItemList()
             }
-            ItemList()
+            hr()
+            h6 { "HTMX WS example" }
+            // example of using htmx ws
+            div(.hx.ext(.ws), .ws.connect("/echo"), .hx.target("#echo")) {
+                form(.ws.send, .style("display: flex;")) {
+                    input(.type(.text), .name("message"), .value("Hello, World!"), .required)
+                    button(.class("btn btn-primary"), .style("height: 100%; margin-left: 1rem;")) { "Send" }
+                }
+                div(.id("echo")) {}
+            }
         }
     }
 }
@@ -74,6 +78,7 @@ struct TimeHeading: HTML {
         }
     }
 }
+
 enum EnvironmentValues {
     @TaskLocal static var database: Database = .shared
 }
@@ -82,7 +87,7 @@ struct WSResponse: HTML {
     var echoRequest: EchoRequest
 
     var content: some HTML {
-        div(.id(echoRequest.headers.HXTarget), .hx.swapOOB(.beforeEnd, "#\(echoRequest.headers.HXTarget)")) {
+        div(.id(echoRequest.headers.hxTarget), .hx.swapOOB(.beforeEnd, "#\(echoRequest.headers.hxTarget)")) {
             "Received: \(echoRequest.message) at \(Date())"
             br()
         }
