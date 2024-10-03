@@ -21,6 +21,27 @@ div {
 MyFragment(items: items)
     .attributes(.hx.swapOOB(.outerHTML, "#list"))
 ```
+```swift
+import Elementary
+import ElementaryHTMXSSE
+
+div(.hx.ext(.sse), .sse.connect("/time"), .sse.swap("message")) {
+    Date()
+}
+```
+```swift
+import Elementary
+import ElementaryHTMXWS
+
+div(.hx.ext(.ws), .ws.connect("/echo"), .hx.target("#echo")) {
+    form(.ws.send) {
+        input(.type(.text), .name("message"))
+        button { "Send" }
+    }
+    div(.id("echo")) {}
+}
+// Hint: The server needs to return a HTML element with the id of the .hx.target
+```
 
 ## Play with it
 
@@ -36,7 +57,6 @@ There is also a `ElementaryHTMXSSE` module that adds the `.sse` syntax for the [
 
 ## Future directions
 
-- Add module for [WebSockets extension](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/ws/README.md)
 - Add module (or separate package?) for HTMX Request and Response headers
 
 PRs welcome.

@@ -25,6 +25,10 @@ let package = Package(
             name: "ElementaryHTMXSSE",
             targets: ["ElementaryHTMXSSE"]
         ),
+        .library(
+            name: "ElementaryHTMXWS",
+            targets: ["ElementaryHTMXWS"]
+        ),
     ],
     dependencies: [
         .package(url: "https://github.com/sliemeobn/elementary.git", from: "0.3.0"),
@@ -45,10 +49,26 @@ let package = Package(
             ],
             swiftSettings: featureFlags
         ),
+        .target(
+            name: "ElementaryHTMXWS",
+            dependencies: [
+                .product(name: "Elementary", package: "elementary"),
+                .target(name: "ElementaryHTMX"),
+            ],
+            swiftSettings: featureFlags
+        ),
+        .testTarget(
+            name: "TestUtilities",
+            dependencies: [
+                .product(name: "Elementary", package: "elementary"),
+            ],
+            swiftSettings: featureFlags
+        ),
         .testTarget(
             name: "ElementaryHTMXTest",
             dependencies: [
                 .target(name: "ElementaryHTMX"),
+                .target(name: "TestUtilities"),
             ],
             swiftSettings: featureFlags
         ),
@@ -56,6 +76,15 @@ let package = Package(
             name: "ElementaryHTMXSSETest",
             dependencies: [
                 .target(name: "ElementaryHTMXSSE"),
+                .target(name: "TestUtilities"),
+            ],
+            swiftSettings: featureFlags
+        ),
+        .testTarget(
+            name: "ElementaryHTMXWSTest",
+            dependencies: [
+                .target(name: "ElementaryHTMXWS"),
+                .target(name: "TestUtilities"),
             ],
             swiftSettings: featureFlags
         ),

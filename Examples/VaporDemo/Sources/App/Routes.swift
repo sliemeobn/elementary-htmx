@@ -30,4 +30,10 @@ func addRoutes(to app: Application) {
             })
         )
     }
+
+    app.webSocket("echo") { _, ws in
+        ws.onText { ws, text in
+            ws.send("<div id=\"echo\" hx-swap-oob=\"beforeend:#echo\">Echo: \(text)<br></div>")
+        }
+    }
 }

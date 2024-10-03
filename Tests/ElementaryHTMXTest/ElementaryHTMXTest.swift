@@ -1,5 +1,6 @@
 import Elementary
 import ElementaryHTMX
+import TestUtilities
 import XCTest
 
 final class elementary_htmxTests: XCTestCase {
@@ -17,7 +18,7 @@ final class elementary_htmxTests: XCTestCase {
         HTMLAttributeAssertEqual(.hx.swap(.textContent), "hx-swap", "textContent")
         HTMLAttributeAssertEqual(.hx.swap(.beforeBegin), "hx-swap", "beforebegin")
         HTMLAttributeAssertEqual(.hx.swap(.afterBegin), "hx-swap", "afterbegin")
-        HTMLAttributeAssertEqual(.hx.swap(.beforEend), "hx-swap", "beforeend")
+        HTMLAttributeAssertEqual(.hx.swap(.beforeEnd), "hx-swap", "beforeend")
         HTMLAttributeAssertEqual(.hx.swap(.afterEnd), "hx-swap", "afterend")
         HTMLAttributeAssertEqual(.hx.swap(.delete), "hx-swap", "delete")
         HTMLAttributeAssertEqual(.hx.swap(.none), "hx-swap", "none")
