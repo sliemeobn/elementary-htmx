@@ -28,5 +28,5 @@ brew install watchexec
 This will watch all swift files in the demo package, build on-demand, and re-sync the browser page
 
 ```sh
-swift dev
+./swift-dev
 ```
