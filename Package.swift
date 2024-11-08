@@ -20,6 +20,7 @@ let package = Package(
         .library(name: "ElementaryHTMX", targets: ["ElementaryHTMX"]),
         .library(name: "ElementaryHTMXSSE", targets: ["ElementaryHTMXSSE"]),
         .library(name: "ElementaryHTMXWS", targets: ["ElementaryHTMXWS"]),
+        .library(name: "ElementaryHyperscript", targets: ["ElementaryHyperscript"]]
     ],
     dependencies: [
         .package(url: "https://github.com/sliemeobn/elementary.git", from: "0.3.0"),
