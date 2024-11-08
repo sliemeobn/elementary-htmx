@@ -47,6 +47,16 @@ div(.hx.ext(.ws), .ws.connect("/echo")) {
 }
 ```
 
+```swift
+import Elementary
+import ElementaryHyperscript
+
+// Hyperscript extension
+button(.hs("on click send hello to <form />")) {
+    "Send"
+}
+```
+
 ## Play with it
 
 Check out the [Hummingbird example app](https://github.com/sliemeobn/elementary-htmx/tree/main/Examples/HummingbirdDemo).
@@ -58,6 +68,8 @@ Check out the [Vapor example app](https://github.com/sliemeobn/elementary-htmx/t
 The package brings the `.hx` syntaxt to all `HTMLElements` - providing a rich API for most [HTMX attributes](https://htmx.org/docs/).
 
 There is also an `ElementaryHTMXSSE` module that adds the `.sse` syntax for the [Server Sent Events extensions](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/sse/README.md), as well as `ElementaryHTMXWS` to add the `.ws` syntax for the [WebSockets extensions.](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/ws/README.md)
+
+The package also supports the [Hyperscript](https://hyperscript.org) `_` attribute as `.hs`.
 
 ## Future directions
 
