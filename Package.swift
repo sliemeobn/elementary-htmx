@@ -48,6 +48,14 @@ let package = Package(
             ],
             swiftSettings: featureFlags
         ),
+        .target(
+            name: "ElementaryHyperscript",
+            dependencies: [
+                .product(name: "Elementary", package: "elementary"),
+                .target(name: "ElementaryHTMX"),
+            ],
+            swiftSettings: featureFlags
+        ),
         .testTarget(
             name: "TestUtilities",
             dependencies: [
@@ -75,6 +83,14 @@ let package = Package(
             name: "ElementaryHTMXWSTest",
             dependencies: [
                 .target(name: "ElementaryHTMXWS"),
+                .target(name: "TestUtilities"),
+            ],
+            swiftSettings: featureFlags
+        ),
+        .testTarget(
+            name: "ElementaryHyperscriptTest",
+            dependencies: [
+                .target(name: "ElementaryHyperscript"),
                 .target(name: "TestUtilities"),
             ],
             swiftSettings: featureFlags
