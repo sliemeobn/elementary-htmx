@@ -57,13 +57,6 @@ let package = Package(
             swiftSettings: featureFlags
         ),
         .testTarget(
-            name: "TestUtilities",
-            dependencies: [
-                .product(name: "Elementary", package: "elementary"),
-            ],
-            swiftSettings: featureFlags
-        ),
-        .testTarget(
             name: "ElementaryHTMXTest",
             dependencies: [
                 .target(name: "ElementaryHTMX"),
@@ -93,6 +86,14 @@ let package = Package(
                 .target(name: "ElementaryHyperscript"),
                 .target(name: "TestUtilities"),
             ],
+            swiftSettings: featureFlags
+        ),
+        .target(
+            name: "TestUtilities",
+            dependencies: [
+                .product(name: "Elementary", package: "elementary"),
+            ],
+            path: "Tests/TestUtilities",
             swiftSettings: featureFlags
         ),
     ]

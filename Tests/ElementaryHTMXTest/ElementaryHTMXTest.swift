@@ -3,7 +3,7 @@ import ElementaryHTMX
 import TestUtilities
 import XCTest
 
-final class elementary_htmxTests: XCTestCase {
+final class ElementaryHTMXTests: XCTestCase {
     func testMethods() {
         HTMLAttributeAssertEqual(.hx.get("/test"), "hx-get", "/test")
         HTMLAttributeAssertEqual(.hx.post("/test"), "hx-post", "/test")

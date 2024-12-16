@@ -1,5 +1,4 @@
 import Elementary
-import ElementaryHTMX
 
 public extension HTMLAttribute where Tag: HTMLTrait.Attributes.Global {
     /// A namespace for the HTMX SSE-extension.
