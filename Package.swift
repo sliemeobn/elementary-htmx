@@ -53,7 +53,6 @@ let package = Package(
             name: "ElementaryHyperscript",
             dependencies: [
                 .product(name: "Elementary", package: "elementary"),
-                .target(name: "ElementaryHTMX"),
             ],
             swiftSettings: featureFlags
         ),

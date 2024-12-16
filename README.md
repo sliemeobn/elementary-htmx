@@ -52,7 +52,7 @@ import Elementary
 import ElementaryHyperscript
 
 // Hyperscript extension
-button(.hs("on click send hello to <form />")) {
+button(.hyperscript("on click send hello to <form />")) {
     "Send"
 }
 ```
@@ -69,7 +69,7 @@ The package brings the `.hx` syntaxt to all `HTMLElements` - providing a rich AP
 
 There is also an `ElementaryHTMXSSE` module that adds the `.sse` syntax for the [Server Sent Events extensions](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/sse/README.md), as well as `ElementaryHTMXWS` to add the `.ws` syntax for the [WebSockets extensions.](https://github.com/bigskysoftware/htmx-extensions/blob/main/src/ws/README.md)
 
-The package also supports the [Hyperscript](https://hyperscript.org) `_` attribute as `.hs`.
+The package also supports the [Hyperscript](https://hyperscript.org) `_` attribute as `.hyperscript`.
 
 ## Future directions
 
