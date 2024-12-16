@@ -3,7 +3,7 @@ import ElementaryHTMXWS
 import TestUtilities
 import XCTest
 
-final class elementary_htmxsseTests: XCTestCase {
+final class ElementaryHTMXWSTests: XCTestCase {
     func testExtension() {
         HTMLAttributeAssertEqual(.hx.ext(.ws), "hx-ext", "ws")
     }
