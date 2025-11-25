@@ -12,7 +12,7 @@ actor BonusFactStore {
     ]
 
     func calculateBonusFact() async -> String {
-        return bonusFacts.randomElement()!
+        bonusFacts.randomElement()!
     }
 
     @TaskLocal static var current: BonusFactStore?

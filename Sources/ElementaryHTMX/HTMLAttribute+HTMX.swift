@@ -28,12 +28,15 @@ extension HTMLAttribute.hx {
     }
 
     public static func selectOOB(
-        _ selector: String, _ swap: HTMLAttributeValue.HTMX.SwapTarget? = nil
+        _ selector: String,
+        _ swap: HTMLAttributeValue.HTMX.SwapTarget? = nil
     ) -> HTMLAttribute {
         if let swap {
             .init(
-                name: "hx-select-oob", value: "\(selector):\(swap.rawValue)",
-                mergedBy: .appending(separatedBy: ","))
+                name: "hx-select-oob",
+                value: "\(selector):\(swap.rawValue)",
+                mergedBy: .appending(separatedBy: ",")
+            )
         } else {
             .init(name: "hx-select-oob", value: selector, mergedBy: .appending(separatedBy: ","))
         }
@@ -48,7 +51,8 @@ extension HTMLAttribute.hx {
     }
 
     public static func swapOOB(
-        _ swap: HTMLAttributeValue.HTMX.SwapTarget, _ selector: String? = nil
+        _ swap: HTMLAttributeValue.HTMX.SwapTarget,
+        _ selector: String? = nil
     ) -> HTMLAttribute {
         if let selector {
             .init(name: "hx-swap-oob", value: "\(swap.rawValue):\(selector)")

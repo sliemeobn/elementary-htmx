@@ -4,10 +4,10 @@ import PackageDescription
 let package = Package(
     name: "HummingbirdDemo",
     platforms: [
-        .macOS(.v14),
+        .macOS(.v14)
     ],
     products: [
-        .executable(name: "App", targets: ["App"]),
+        .executable(name: "App", targets: ["App"])
     ],
     dependencies: [
         .package(path: "../../"),
@@ -32,9 +32,9 @@ let package = Package(
                 .product(name: "ServiceLifecycle", package: "swift-service-lifecycle"),
             ],
             resources: [
-                .copy("Public"),
+                .copy("Public")
             ],
             swiftSettings: [.enableExperimentalFeature("StrictConcurrency=complete")]
-        ),
+        )
     ]
 )

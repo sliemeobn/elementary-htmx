@@ -14,7 +14,8 @@ struct MainPage: HTMLDocument {
         script(.src("/htmxws.min.js")) {}
         link(
             .rel(.stylesheet),
-            .href("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css"))
+            .href("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css")
+        )
     }
 
     var body: some HTML {
