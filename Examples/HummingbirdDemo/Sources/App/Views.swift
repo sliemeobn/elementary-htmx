@@ -41,7 +41,9 @@ struct MainPage: HTMLDocument {
             div(.hx.ext(.ws), .ws.connect("/echo"), .hx.target("#echo")) {
                 form(.ws.send, .style("display: flex;")) {
                     input(.type(.text), .name("message"), .value("Hello, World!"), .required)
-                    button(.class("btn btn-primary"), .style("height: 100%; margin-left: 1rem;")) { "Send" }
+                    button(.class("btn btn-primary"), .style("height: 100%; margin-left: 1rem;")) {
+                        "Send"
+                    }
                 }
                 div(.id("echo")) {}
             }
@@ -52,7 +54,7 @@ struct MainPage: HTMLDocument {
 struct ItemList: HTML {
     @Environment(EnvironmentValues.$database) var database
 
-    var content: some HTML<HTMLTag.div> {
+    var body: some HTML<HTMLTag.div> {
         div(.id("list")) {
             let items = await database.model.items
 
@@ -72,7 +74,7 @@ struct ItemList: HTML {
 }
 
 struct TimeHeading: HTML {
-    var content: some HTML<HTMLTag.h4> {
+    var body: some HTML<HTMLTag.h4> {
         h4 {
             "Server Time: \(Date())"
         }
@@ -86,8 +88,11 @@ enum EnvironmentValues {
 struct WSResponse: HTML {
     var echoRequest: EchoRequest
 
-    var content: some HTML {
-        div(.id(echoRequest.headers.hxTarget), .hx.swapOOB(.beforeEnd, "#\(echoRequest.headers.hxTarget)")) {
+    var body: some HTML {
+        div(
+            .id(echoRequest.headers.hxTarget),
+            .hx.swapOOB(.beforeEnd, "#\(echoRequest.headers.hxTarget)")
+        ) {
             "Received: \(echoRequest.message) at \(Date())"
             br()
         }
