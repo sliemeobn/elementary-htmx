@@ -12,7 +12,10 @@ struct MainPage: HTMLDocument {
         script(.src("/htmx.min.js")) {}
         script(.src("/htmxsse.min.js")) {}
         script(.src("/htmxws.min.js")) {}
-        link(.rel(.stylesheet), .href("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css"))
+        link(
+            .rel(.stylesheet),
+            .href("https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css")
+        )
     }
 
     var body: some HTML {
@@ -60,7 +63,7 @@ struct ResultView: HTML {
 
     @Environment(requiring: BonusFactStore.$current) var bonusFacts
 
-    var content: some HTML {
+    var body: some HTML {
         p {
             "\(x) + \(y) = "
             b { "\(x + y)" }
@@ -76,7 +79,10 @@ struct ResultView: HTML {
 struct WSEcho: HTML {
     let message: String
 
-    var content: some HTML {
-        div(.id("echo"), .hx.swapOOB(.beforeEnd)) { "Echo: \(message)"; br() }
+    var body: some HTML {
+        div(.id("echo"), .hx.swapOOB(.beforeEnd)) {
+            "Echo: \(message)"
+            br()
+        }
     }
 }

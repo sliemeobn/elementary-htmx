@@ -1,7 +1,7 @@
 import Foundation
 import Hummingbird
-import HummingbirdWebSocket
 import HummingbirdWSCompression
+import HummingbirdWebSocket
 
 @main
 struct App {
@@ -22,7 +22,7 @@ struct App {
             onServerRunning: { _ in
                 print("Server running on http://localhost:8080/")
                 #if DEBUG
-                    browserSyncReload()
+                browserSyncReload()
                 #endif
             }
         )

@@ -4,10 +4,10 @@ import PackageDescription
 let package = Package(
     name: "HummingbirdDemo",
     platforms: [
-        .macOS(.v14),
+        .macOS(.v14)
     ],
     products: [
-        .executable(name: "App", targets: ["App"]),
+        .executable(name: "App", targets: ["App"])
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/vapor", from: "4.102.0"),
@@ -27,9 +27,9 @@ let package = Package(
                 .product(name: "AsyncAlgorithms", package: "swift-async-algorithms"),
             ],
             resources: [
-                .copy("Public"),
+                .copy("Public")
             ],
             swiftSettings: [.enableExperimentalFeature("StrictConcurrency=complete")]
-        ),
+        )
     ]
 )

@@ -9,7 +9,7 @@ struct App {
         addRoutes(to: app)
 
         #if DEBUG
-            app.lifecycle.use(BrowserSyncHandler())
+        app.lifecycle.use(BrowserSyncHandler())
         #endif
 
         try await app.execute()
