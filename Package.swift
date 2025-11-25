@@ -23,13 +23,13 @@ let package = Package(
         .library(name: "ElementaryHyperscript", targets: ["ElementaryHyperscript"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/sliemeobn/elementary.git", from: "0.3.0"),
+        .package(url: "https://github.com/sliemeobn/elementary.git", from: "0.6.0")
     ],
     targets: [
         .target(
             name: "ElementaryHTMX",
             dependencies: [
-                .product(name: "Elementary", package: "elementary"),
+                .product(name: "Elementary", package: "elementary")
             ],
             swiftSettings: featureFlags
         ),
@@ -52,7 +52,7 @@ let package = Package(
         .target(
             name: "ElementaryHyperscript",
             dependencies: [
-                .product(name: "Elementary", package: "elementary"),
+                .product(name: "Elementary", package: "elementary")
             ],
             swiftSettings: featureFlags
         ),
@@ -91,7 +91,7 @@ let package = Package(
         .target(
             name: "TestUtilities",
             dependencies: [
-                .product(name: "Elementary", package: "elementary"),
+                .product(name: "Elementary", package: "elementary")
             ],
             path: "Tests/TestUtilities",
             swiftSettings: featureFlags

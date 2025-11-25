@@ -9,3 +9,4 @@ DerivedData/
 Package.resolved
 /.vscode
 /.devcontainer
+.swift-version
